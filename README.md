@@ -1,2 +1,2 @@
 # Java
-Java projects
+A collection of recent Java projects ive created.
