@@ -1,3 +1,6 @@
+Code is rather messy due to a brute force approach being used due to a lack of time towards the end of third year. 
+Dissertation acheived a 1st.
+
 1. Click Upload
 2. select a file of images such as the one provided.
 3. Move the Jslider to cycle through images or use next/previous buttons
