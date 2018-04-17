@@ -1,0 +1,17 @@
+.inc{
+    color: #5D3260;
+    width: 30%;
+    height: 14%;
+    overflow: auto;
+    display: block;
+    background-color:#F5F5F5
+
+}
+
+.inccontainer{
+    border-style: solid;
+    border: #050505;
+    border-width: 2px;
+
+
+}

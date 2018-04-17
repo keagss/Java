@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<filter>
+		<filter-name>guiceFilter</filter-name>
+		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+	</filter>
+
+	<listener>
+		<listener-class>uk.org.eduserv.status.ContextListener</listener-class>
+	</listener>
+
+	<filter-mapping>
+		<filter-name>guiceFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<session-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+<!--
+	<servlet>
+		<servlet-name>ListServlet</servlet-name>
+		<servlet-class>uk.org.eduserv.status.resources.ListServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+
+
+	<servlet-mapping>
+		<servlet-name>ListServlet</servlet-name>
+		<url-pattern>/list</url-pattern>
+	</servlet-mapping>
+-->
+
+
+	<!--
+	<servlet>
+		<servlet-name>PostServlet</servlet-name>
+		<servlet-class>uk.org.eduserv.status.resources.PostServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PostServlet</servlet-name>
+		<url-pattern>/post</url-pattern>
+	</servlet-mapping>
+	-->
+
+
+
+<!--
+	<servlet>
+		<servlet-name>incPostServlet</servlet-name>
+		<servlet-class>uk.org.eduserv.status.resources.incPostServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>incPostServlet</servlet-name>
+		<url-pattern>/postincident</url-pattern>
+	</servlet-mapping>
+
+-->
+
+
+
+</web-app>

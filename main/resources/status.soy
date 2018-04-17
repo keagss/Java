@@ -1,0 +1,55 @@
+{namespace uk.org.eduserv.status}
+
+/**
+  *Status page
+  *@param incidents
+  */
+
+{template .status}
+
+    <html lang="en">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+        <link rel="stylesheet" type="text/css" href="StatusStyling.css">
+        <head>
+
+        </head>
+        <body>
+
+            {foreach $key in keys($incidents)}
+            <div class="inc"> {$incidents[$key][0]}
+            </br>
+                {if $incidents[$key][1]}{$incidents[$key][1]}{/if}
+            </br>
+                {if $incidents[$key][2]}{$incidents[$key][2]}{/if}
+            </br>
+                {if $incidents[$key][3]}{$incidents[$key][3]}{/if}
+            </br>
+                {if $incidents[$key][4]}{$incidents[$key][4]}{/if}
+            </br>
+                {if $incidents[$key][5]}{$incidents[$key][5]}{/if}
+                </br>
+                {if $incidents[$key][6]}{$incidents[$key][6]}{/if}
+            </div>
+                <form class ="incupdate" action="postupdateincident" method="POST" name="incupdate">
+                            <select name="incidentstatus">
+                            <option name="incidentstatus" value="investigating">Investigating</option>
+                            <option name="incidentstatus" value="identified">Identified</option>
+                            <option name="incidentstatus" value="monitoring">Monitoring</option>
+                            <option name="incidentstatus" value="resolved">Resolved</option>
+                        </select>
+                    <select name="incimpact">
+                        <option name="incimpact" value="none">None</option>
+                        <option name="incimpact" value="minor">Minor</option>
+                        <option name="incimpact" value="major">Major</option>
+                        <option name="incimpact" value="critical">Criticall</option>
+                    </select>
+                    <input type="hidden" name="incidentid" value={$key}>
+                    {$key}
+                    <textarea  rows="10" cols="70"  class="desc" id="description" name="description" value="Enter Description" ></textarea>
+                    <input type="submit" value="Submit update" />
+                </form>
+            {/foreach}
+
+        </body>
+    </html>
+{/template}

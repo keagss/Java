@@ -1,0 +1,82 @@
+{namespace uk.org.eduserv.status}
+
+/**
+ * List page
+ * @param services
+ */
+
+
+{template .list}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="styling.css?version=51">
+
+<head>
+   <title>Manager</title>
+</head>
+<body>
+
+<h1>Status page update manager</h1>
+
+ //iterates through hashmap, creates buttons for each that when selected add the hashmap key (service ID) to the componentid textbox and the Hashmap key value to the servicename textbox
+<h2 class="cont">
+   {foreach $key in keys($services)}
+       <form>
+           <input class="button" type="button" value={$services[$key]} onclick=document.myForm.componentid.value="{$key}",document.myForm.servicename.value="{$services[$key]}",document.incForm.componentid.value="{$key}",document.incForm.servicename.value="{$services[$key]}" />
+       </form>
+   {/foreach}
+</h2>
+
+<input class="formbutton" type="button" value="Incident" onclick=document.myForm.style.display="none",document.incForm.style.display="block">
+<input class="formbutton" type="button" value="Scheduled" onclick=document.incForm.style.display="none",document.myForm.style.display="block">
+
+<div id="postform">
+//form that passes maintenance information to PostServlet
+<form class="maintpost" action="post" method="POST" name="myForm" id="myform">
+    <input type="text" class="service" id="serviceName" name="servicename" value = "Title" />
+    <input  type="text" id="componentId" name="componentid" value = "test" />
+    Start:<input  type="datetime-local"  name="startdate" >
+    End:<input  type="datetime-local"  name="enddate" >
+    <input class="formbutton" type="button" value="no impact" onclick=description.value=noImpact>
+    <input class="formbutton" type="button" value="some impact" onclick=description.value=someImpact>
+    <input class="formbutton" type="button" value="large impact" onclick=description.value=largeImpact>
+    <textarea  rows="10" cols="70"  class="desc" id="description" name="description" value = "Enter Description" ></textarea>
+    <input class="submitbutton" type="submit" value="Submit" />
+</form>
+
+
+    //form that passes incident information to PostServlet
+<form  action="postincident" class="incpostform" method="POST" name="incForm" id="incform">
+    <input  type="text" class="service" id="serviceName" name="servicename" value = "Title" />
+    <input type="text" id="componentId" name="componentid" value = "test" />
+    <input type="button" value="some impact" onclick=description.value=someImpact>
+    <input type="button" value="large impact" onclick=description.value=largeImpact>
+    <textarea  rows="10" cols="70"  class="desc" id="description" name="description" value = "Enter Description" ></textarea>
+    <input class="submitbutton" type="submit" value="Submit" />
+</form>
+</div>
+
+
+//javascrippt that is used for formatting the date to ISO8601 for the post via the PostServlet + adding some variables for buttons in the form above
+    <script type="text/javascript">
+        var months = ['01','02','03','04','05','06','07',
+            '08','09','10','11','12'];
+        var tomorrow = new Date();
+        tomorrow.setTime(tomorrow.getTime() + (1000*3600*24));
+        document.myForm.startdate.value=("datestart").innerHTML = tomorrow.getFullYear()+"-"+ months[tomorrow.getMonth()] + "-" + tomorrow.getDate()+ "T"+"07:00";
+        document.myForm.enddate.value=("endstart").innerHTML = tomorrow.getFullYear()+"-"+ months[tomorrow.getMonth()] + "-" + tomorrow.getDate()+ "T"+"09:00";
+
+        var noImpact ="This service will be going under maintenance, there will be no user impact";
+        var someImpact ="This service will be going under maintenance, there will be some user impact";
+        var largeImpact = "This service will be going under maintenance, it will be unavailable during this. Please accept our apologies for any inconvenience caused.";
+    </script>
+
+<div class="links">
+<a href="https://openathens.statuspage.io/" class="statuspage" target="_blank">Status page</a>
+<a href="/status" class="currentincidents"  target="_blank">Current incidents</a>
+</div>
+</body>
+
+</html>
+{/template}
